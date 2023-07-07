@@ -1,10 +1,12 @@
 package com.example.library.daos;
 
+import com.example.library.models.Book;
 import com.example.library.models.Person;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -39,5 +41,12 @@ public class PersonDAO {
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
+    }
+
+    public List<Book> showPersonBooks(int id) {
+        return jdbcTemplate.query("SELECT Book.title, Book.author, Book.year " +
+                "FROM Book JOIN Person_Book on Book.id = Person_Book.book_id " +
+                "JOIN Person on Person_Book.person_id = Person.id where person_id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(Book.class)).stream().toList();
+
     }
 }

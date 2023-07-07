@@ -36,4 +36,12 @@ public class Person {
     public void setYearOfBirthday(int yearOfBirthday) {
         this.yearOfBirthday = yearOfBirthday;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

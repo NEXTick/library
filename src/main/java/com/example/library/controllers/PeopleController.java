@@ -1,5 +1,6 @@
 package com.example.library.controllers;
 
+import com.example.library.daos.BookDAO;
 import com.example.library.daos.PersonDAO;
 import com.example.library.models.Person;
 import com.example.library.util.PersonValidator;
@@ -24,13 +25,14 @@ public class PeopleController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", dao.index());
-        return "index";
+        return "indexPeople";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", dao.show(id));
-        return "show";
+        model.addAttribute("personBooks", dao.showPersonBooks(id));
+        return "showPerson";
     }
 
     @PostMapping()
