@@ -14,13 +14,13 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class BookService {
+public class BooksService {
 
     private final BooksRepository booksRepository;
 
     private final PeopleRepository peopleRepository;
 
-    public BookService(BooksRepository booksRepository, PeopleRepository peopleRepository) {
+    public BooksService(BooksRepository booksRepository, PeopleRepository peopleRepository) {
         this.booksRepository = booksRepository;
         this.peopleRepository = peopleRepository;
     }

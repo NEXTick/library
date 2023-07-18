@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.PublicKey;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -58,5 +59,9 @@ public class PeopleService {
 
     public void delete(int id) {
         peopleRepository.findById(id).ifPresent(peopleRepository::delete);
+    }
+
+    public Optional<Person> getPersonByName(String name) {
+        return peopleRepository.findByName(name);
     }
 }
