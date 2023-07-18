@@ -84,14 +84,14 @@ public class BookController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("book", booksService.findOne(id));
-        return "book/edit";
+        return "books/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors()) {
-            return "book/edit";
+            return "books/edit";
         }
         booksService.update(id, book);
         return "redirect:/books";
