@@ -28,20 +28,20 @@ public class BookController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("books", bookService.index());
+        model.addAttribute("books", bookService.findAll());
         return "book/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
-        model.addAttribute("book", bookService.show(id));
+        model.addAttribute("book", bookService.findOne(id));
         Optional<Person> owner = bookService.showOwner(id);
 
         if (owner.isPresent()) {
             model.addAttribute("owner", owner.get());
         }
         else {
-            model.addAttribute("people", peopleService.index());
+            model.addAttribute("people", peopleService.findAll());
         }
         return "book/show";
     }
@@ -75,16 +75,16 @@ public class BookController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("book", bookService.show(id));
+        model.addAttribute("book", bookService.findOne(id));
         return "book/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "book/edit";
         }
-        bookService.update(id, book);
+        bookService.update(book);
         return "redirect:/books";
     }
 

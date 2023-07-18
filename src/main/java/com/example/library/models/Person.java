@@ -1,18 +1,33 @@
 package com.example.library.models;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
+@Entity
+@Table(name = "person")
 public class Person {
-    private long id;
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 50, message = "Uncorrected name")
+    @Column(name = "name")
     private String name;
     @Min(value = 1850, message = "Year of birthday can be since 1850")
+    @Column(name = "year_of_birthday", nullable = false)
     private int yearOfBirthday;
 
-    public Person(long id, String name, int yearOfBirthday) {
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    public Person(int id, String name, int yearOfBirthday) {
         this.id = id;
         this.name = name;
         this.yearOfBirthday = yearOfBirthday;
@@ -37,11 +52,19 @@ public class Person {
         this.yearOfBirthday = yearOfBirthday;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
