@@ -36,7 +36,8 @@ public class PeopleService {
         if (p.isPresent()) {
             Hibernate.initialize(p.get().getBooks());
             p.get().getBooks().forEach(book -> {
-                long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
+                long takenAt = book.getTakenAt() == null ? new Date().getTime() : book.getTakenAt().getTime();
+                long diffInMillies = takenAt - new Date().getTime();
                 if (diffInMillies > 864_000_000) {
                     book.setExpired(true);
                 }
