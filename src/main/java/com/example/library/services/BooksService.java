@@ -94,7 +94,7 @@ public class BooksService {
     public void assign(int id, Person selectedPerson) {
         booksRepository.findById(id).ifPresent(
                 book -> {
-                    book.setOwner(null);
+                    book.setOwner(selectedPerson);
                     book.setTakenAt(new Date());
                 }
         );
