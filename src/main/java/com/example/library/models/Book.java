@@ -35,16 +35,6 @@ public class Book {
     @Transient
     private boolean expired;
 
-    public Book(int id, String title, String author, int year) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.year = year;
-    }
-
-    public Book() {
-    }
-
     public int getId() {
         return id;
     }

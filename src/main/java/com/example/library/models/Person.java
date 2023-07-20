@@ -24,17 +24,12 @@ public class Person {
     @Column(name = "year_of_birthday", nullable = false)
     private int yearOfBirthday;
 
+    @Column(name = "password")
+    @NotEmpty(message = "Password should not be empty")
+    private String password;
+
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
-
-    public Person(int id, String name, int yearOfBirthday) {
-        this.id = id;
-        this.name = name;
-        this.yearOfBirthday = yearOfBirthday;
-    }
-
-    public Person() {
-    }
 
     public String getName() {
         return name;
@@ -58,6 +53,14 @@ public class Person {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Book> getBooks() {
