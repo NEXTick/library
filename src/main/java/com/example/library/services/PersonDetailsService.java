@@ -3,6 +3,8 @@ package com.example.library.services;
 import com.example.library.models.Person;
 import com.example.library.repositories.PeopleRepository;
 import com.example.library.security.PersonDetails;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,8 +19,6 @@ public class PersonDetailsService implements UserDetailsService {
 
     public PersonDetailsService(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
-
-
     }
 
     @Override
