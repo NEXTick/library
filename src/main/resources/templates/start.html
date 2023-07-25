@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Библиотека</title>
@@ -12,6 +12,8 @@
     <a href="/books">Книги</a>
     <br/>
     <br/>
-<a href="/logout">Logout</a>
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>
