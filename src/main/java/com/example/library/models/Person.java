@@ -28,6 +28,9 @@ public class Person {
     @NotEmpty(message = "Password should not be empty")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
 
@@ -61,6 +64,14 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<Book> getBooks() {
