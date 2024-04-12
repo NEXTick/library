@@ -7,13 +7,16 @@
 <body>
 
 <div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">user</a>
+    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getFullName() + ', ' + person.getDateOfBirth()}">user</a>
 </div>
 
 <br/>
 <hr/>
 
 <a href="/people/new">Добавить читателя</a>
+
+<br/>
+<a href="/library">Вернуться на главную страницу</a>
 
 </body>
 </html>

@@ -1,17 +1,18 @@
 package library.util;
 
-import library.dao.PersonDAO;
 import library.models.Person;
+import library.repositories.PeopleRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
 public class PersonValidator implements Validator {
-    private final PersonDAO personDAO;
 
-    public PersonValidator(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    PeopleRepository peopleRepository;
+
+    public PersonValidator(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if (personDAO.getPersonByFullName(person.getFullName()).isPresent()) {
+        if (peopleRepository.findByFullName(person.getFullName()).isPresent()) {
             errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
         }
     }

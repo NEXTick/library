@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Найденные книги</title>
+</head>
+<body>
+<p>Найденные по вашему запросу книги:</p>
+<div th:each="book : ${foundedBooks}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()} ">book</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/books/new">Добавить новую книгу</a>
+
+<br/>
+<a href="/books">Вернуться к списку книг</a>
+
+<br/>
+<a href="/library">Вернуться на главную страницу</a>
+
+</body>
+</html>
